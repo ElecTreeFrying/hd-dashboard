@@ -1,0 +1,60 @@
+<form (ngSubmit)="onAddDoctor()" [formGroup]="doctorForm">
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field>
+        <mat-label>Fullname</mat-label>
+        <input matInput type="text" formControlName="doctorName">
+          <mat-error data-error *ngIf="doctorForm.get('doctorName').invalid">
+          <mat-error *ngIf="doctorForm.get('doctorName').errors['required']">This is required.</mat-error>
+          <div *ngIf="!doctorForm.get('doctorName').errors['required']">
+            <mat-error *ngIf="doctorForm.get('doctorName').errors['pattern']">Please enter a valid name.</mat-error>
+            <div *ngIf="!doctorForm.get('doctorName').errors['pattern']">
+              <mat-error *ngIf="doctorForm.get('doctorName').invalid">Name too short.</mat-error>
+              <div *ngIf="!doctorForm.get('doctorName').invalid">
+                <mat-error *ngIf="doctorForm.get('doctorName').errors['pattern']">Please enter a valid name.</mat-error>
+              </div>
+            </div>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="doctorEmail">
+        <mat-error data-error *ngIf="doctorForm.get('doctorEmail').invalid">
+          <mat-error *ngIf="doctorForm.get('doctorEmail').errors['required']">This is required.</mat-error>
+          <div *ngIf="!doctorForm.get('doctorEmail').errors['required']">
+            <mat-error *ngIf="doctorForm.get('doctorEmail').errors['email']">Not a valid email address.</mat-error>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <mat-form-field>
+        <mat-label>Doctor No.</mat-label>
+        <input matInput type="text" formControlName="doctorNumber">
+        <mat-error data-error *ngIf="doctorForm.get('doctorNumber').invalid">
+          <mat-error *ngIf="doctorForm.get('doctorNumber').errors['required']">This is required.</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="text" formControlName="doctorPassword">
+        <mat-error data-error *ngIf="doctorForm.get('doctorPassword').invalid">
+          <mat-error *ngIf="doctorForm.get('doctorPassword').errors['required']">This is required.</mat-error>
+          <div *ngIf="!doctorForm.get('doctorPassword').errors['required']">
+            <mat-error *ngIf="doctorForm.get('doctorPassword').invalid">Password too short.</mat-error>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <div btn-container class="d-flex">
+        <button mat-raised-button color="accent" class="ml-auto" type="submit">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</form>

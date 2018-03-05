@@ -1,0 +1,7 @@
+<div data-container>
+  <div *ngFor="let doctor of doctorDetails | async">
+    <p><strong>Name:</strong> <br>Dr. {{ doctor.doctorName }}</p>
+    <p><strong>Account number:</strong> <br>{{ doctor.doctorNumber }}</p>
+    <p><strong>Email:</strong> <br>{{ doctor.doctorEmail }}</p>
+  </div>
+</div>

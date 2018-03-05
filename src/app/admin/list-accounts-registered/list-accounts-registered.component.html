@@ -1,0 +1,143 @@
+<div [ngSwitch]="client">
+  <div *ngSwitchCase="'Patient'">
+
+    <mat-accordion [displayMode]="'default'">
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Number of patients registered: {{ patientListLength }}</mat-panel-title>
+          <mat-panel-description>Click to show list of patients</mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+
+          <div class="row">
+            <div class="col-12">
+              <button mat-raised-button color="accent" (click)="onClick(true)" *ngIf="!isClicked">CLICK TO VIEW AND COPY</button>
+              <button mat-raised-button color="primary" (click)="onClick(false)" *ngIf="isClicked">CLICK TO COPY ONLY</button>
+              <button mat-raised-button color="accent" class="ml-2" (click)="onSearch(true)">SEARCH PATIENT</button>
+            </div>
+            <div class="col-12 mt-2">
+              <small class="text-muted">Mode: {{ buttonMode }}</small>
+              <hr>
+            </div>
+            <div class="col">
+              <p class="m-0"><strong>Patient name</strong></p>
+              <mat-list>
+                <mat-list-item *ngFor="let patient of patientList | async">
+                  <p mat-line>{{ patient.patientName }}</p>
+                </mat-list-item>
+              </mat-list>
+            </div>
+            <div class="col">
+              <p class="m-0"><strong>Patient no.</strong></p>
+              <mat-list>
+                <mat-list-item *ngFor="let patient of patientList | async">
+                  <p mat-line>
+                    <button mat-icon-button *ngIf="!isClicked"
+                      ngxClipboard [cbContent]="patient.patientNumber"
+                      [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'"
+                      (click)="onClipboard(true, { type: 'no.', value: patient.patientNumber, action: false, data: patient })"><mat-icon>content_copy</mat-icon></button>
+                    <button mat-icon-button *ngIf="isClicked"
+                      ngxClipboard [cbContent]="patient.patientNumber"
+                      (click)="onClipboard(true, { type: 'no.', value: patient.patientNumber, action: true, data: patient })"><mat-icon>fullscreen</mat-icon></button>
+                    {{ patient.patientNumber }}
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+
+        </ng-template>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </div>
+  <div *ngSwitchCase="'Doctor'">
+
+    <mat-accordion [displayMode]="'default'">
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Number of doctors registered: {{ doctorListLength }}</mat-panel-title>
+          <mat-panel-description>Click to show list of doctors</mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+
+          <div class="row">
+            <div class="col-12">
+              <button mat-raised-button color="accent" (click)="onClick(true)" *ngIf="!isClicked">CLICK TO VIEW AND COPY</button>
+              <button mat-raised-button color="primary" (click)="onClick(false)" *ngIf="isClicked">CLICK TO COPY ONLY</button>
+              <button mat-raised-button color="accent" class="ml-2" (click)="onSearch(false)">SEARCH DOCTOR</button>
+            </div>
+            <div class="col-12 mt-2">
+              <small class="text-muted">Mode: {{ buttonMode }}</small>
+              <hr>
+            </div>
+            <div class="col-6">
+              <p class="m-0"><strong>Doctor name</strong></p>
+              <mat-list>
+                <mat-list-item *ngFor="let doctor of doctorList | async">
+                  <p mat-line>
+                    <button mat-icon-button *ngIf="!isClicked"
+                      ngxClipboard [cbContent]="doctor.doctorName"
+                      [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'"
+                      (click)="onClipboard(false, { type: 'name', value: doctor.doctorName, action: false, data: doctor })"><mat-icon>content_copy</mat-icon></button>
+                    <button mat-icon-button *ngIf="isClicked"
+                      ngxClipboard [cbContent]="doctor.doctorName"
+                      (click)="onClipboard(false, { type: 'name', value: doctor.doctorName, action: true, data: doctor })"><mat-icon>fullscreen</mat-icon></button>
+                    {{ doctor.doctorName }}
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </div>
+            <div class="col-6">
+              <p class="m-0"><strong>Doctor no.</strong></p>
+              <mat-list>
+                <mat-list-item *ngFor="let doctor of doctorList | async">
+                  <p mat-line>
+                    <button mat-icon-button
+                      ngxClipboard [cbContent]="doctor.doctorNumber" *ngIf="!isClicked"
+                      [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'"
+                      (click)="onClipboard(false, { type: 'no.', value: doctor.doctorNumber, action: false, data: doctor })"><mat-icon>content_copy</mat-icon></button>
+                    <button mat-icon-button *ngIf="isClicked"
+                      ngxClipboard [cbContent]="doctor.doctorNumber"
+                      (click)="onClipboard(false, { type: 'name', value: doctor.doctorNumber, action: true, data: doctor })"><mat-icon>fullscreen</mat-icon></button>
+                    {{ doctor.doctorNumber }}
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+
+        </ng-template>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+
+  </div>
+  <div *ngSwitchCase="'Admin'">
+
+    <mat-accordion [displayMode]="'default'">
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Number of admins registered: {{ adminListLength }}</mat-panel-title>
+          <!-- <mat-panel-description></mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+
+          <div class="row">
+            <div class="col">
+              <p>no preview available</p>
+            </div>
+          </div>
+
+        </ng-template>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </div>
+</div>

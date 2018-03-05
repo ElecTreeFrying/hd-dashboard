@@ -1,0 +1,63 @@
+<div class="row mt-5 my-2">
+  <div class="col">
+    <h2>Patient readings list</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <mat-card class="mb-5">
+      <div class="row">
+
+        <div class="col">
+          <mat-card-content>
+            <mat-accordion [displayMode]="'default'">
+
+              <div *ngFor="let patient of patientDetails | async">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>{{ patient.patientName }} - No. {{ patient.patientNumber }}</mat-expansion-panel-header>
+                  <mat-card class="mb-5 mt-3">
+                    <div class="row">
+                      <div class="col-12">
+                        <mat-card-content>
+
+                          <div class="row">
+                            <div class="col">
+                              <small><strong>Patient name: </strong>{{ patient.patientName }}</small><br>
+                              <small><strong>Patient number: </strong>{{ patient.patientNumber }}</small><br>
+
+                            </div>
+                            <div class="col">
+                              <small><strong>emailaddress: </strong>{{ patient.patientEmail }}</small><br>
+                              <small><strong>undefined: </strong>NaN</small><br>
+
+                            </div>
+                          </div>
+
+                        </mat-card-content>
+                      </div>
+                      <div class="col-12">
+                        <mat-card-content>
+
+                          <canvas #myChart></canvas>
+
+                          <br><br>
+                          <p>patient-data here</p>
+                            
+                        </mat-card-content>
+                      </div>
+                    </div>
+                  </mat-card>
+                </mat-expansion-panel>
+              </div>
+
+            </mat-accordion>
+          </mat-card-content>
+        </div>
+
+      </div>
+    </mat-card>
+
+  </div>
+</div>

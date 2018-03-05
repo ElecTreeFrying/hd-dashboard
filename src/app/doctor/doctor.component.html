@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-3">
+
+    <div class="row" data-add-remarks>
+      <div class="col">
+
+        <mat-card class="my-5">
+          <mat-card-content>
+            <div class="row">
+              <div class="col-12">
+                <button mat-raised-button color="accent" class="w-100 mb-3" (click)="addRemarks()">ADD REMARKS</button>
+              </div>
+              <div class="col-12">
+                <button mat-raised-button color="accent" class="w-100 mb-3" (click)="showPatientList()">PATIENT LIST</button>
+              </div>
+              <div class="col-12">
+                <button mat-raised-button color="accent" class="w-100" (click)="accountDetails()">ACCOUNT DETAILS</button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>

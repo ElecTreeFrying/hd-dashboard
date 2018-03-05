@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col">
+
+    <div class="row">
+      <div class="col">
+        <p class="text-muted">For experimental purposes.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button mat-raised-button color="accent" class="mr-3" (click)="generateNo(0)">GENERATE</button>
+        <mat-form-field appearance="outline" class="w-50">
+          <mat-label>Fullname</mat-label>
+          <input matInput disabled type="text" [(ngModel)]="randomFullname">
+          <button mat-icon-button matSuffix ngxClipboard *ngIf="isClicked" [cbContent]="randomFullname" color="accent"
+            [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'" (click)="onClipboard(0)"><mat-icon>content_copy</mat-icon></button>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <button mat-raised-button color="accent" class="mr-3" (click)="generateNo(1)">GENERATE</button>
+        <mat-form-field appearance="outline" class="w-50">
+          <mat-label>Email</mat-label>
+          <input matInput disabled type="text" [(ngModel)]="randomEmail">
+          <button mat-icon-button matSuffix ngxClipboard *ngIf="isClicked" [cbContent]="randomEmail" color="accent"
+            [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'" (click)="onClipboard(1)"><mat-icon>content_copy</mat-icon></button>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <button mat-raised-button color="accent" class="mr-3" (click)="generateNo(2)">GENERATE</button>
+        <mat-form-field appearance="outline" class="w-50">
+          <mat-label>Password</mat-label>
+          <input matInput disabled type="text" [(ngModel)]="randomPassword">
+          <button mat-icon-button matSuffix ngxClipboard *ngIf="isClicked" [cbContent]="randomPassword" color="accent"
+            [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'" (click)="onClipboard(2)"><mat-icon>content_copy</mat-icon></button>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </div>
+</div>

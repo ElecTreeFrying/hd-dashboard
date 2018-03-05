@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col">
+
+    <mat-card class="my-5">
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="accent" class="mr-3" (click)="onCollapsePanels()" *ngIf="!isExpand">COLLAPSE ALL PANELS</button>
+          <button mat-raised-button color="accent" class="mr-3" (click)="onExpandPanels()" *ngIf="isExpand">EXPAND ALL PANELS</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+          <mat-card-content class="m-0">
+            <div class="row">
+              <div class="col">
+                <mat-accordion [displayMode]="'default'" [multi]="true">
+
+                  <h5>Generate account numbers</h5><hr>
+
+                  <mat-expansion-panel #patgen>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Patient no.</mat-panel-title>
+                      <mat-panel-description>Generate patient no</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <app-generate-account-no [account]="'Patient'"></app-generate-account-no>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #docgen>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Doctor no.</mat-panel-title>
+                      <mat-panel-description>Generate doctor no.</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <app-generate-account-no [account]="'Doctor'"></app-generate-account-no>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #gengen>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Details</mat-panel-title>
+                      <mat-panel-description>Generate random account details.</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <app-generate-account-details></app-generate-account-details>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                </mat-accordion>
+                <br>
+                <mat-accordion [displayMode]="'default'" [multi]="true">
+
+                  <h5>Show list of registered accounts</h5><hr>
+
+                  <mat-expansion-panel #patlist>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Patient</mat-panel-title>
+                      <mat-panel-description>List of patients registerd</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <app-list-accounts-registered [client]="'Patient'"></app-list-accounts-registered>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #doclist>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Doctor</mat-panel-title>
+                      <mat-panel-description>List of doctors registered</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <app-list-accounts-registered [client]="'Doctor'"></app-list-accounts-registered>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #adlist>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Admin</mat-panel-title>
+                      <mat-panel-description>List of admins registered</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <app-list-accounts-registered [client]="'Admin'"></app-list-accounts-registered>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                </mat-accordion>
+              </div>
+              <div class="col">
+                <mat-accordion [displayMode]="'default'" [multi]="true">
+
+                  <h5>Add patients or doctors</h5><hr>
+
+                  <mat-expansion-panel #addpatdoc>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Doctor</mat-panel-title>
+                      <mat-panel-description>Add patient to doctor</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <!-- <small class="text-mute">ss</small><hr> -->
+                      <app-add-patient-doctor></app-add-patient-doctor>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #adddocpat>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Patient</mat-panel-title>
+                      <mat-panel-description>Add doctor to patient</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <!-- <small class="text-mute"ss></small><hr> -->
+                      <app-add-doctor-patient></app-add-doctor-patient>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                </mat-accordion>
+                <br>
+                <mat-accordion [displayMode]="'default'" [multi]="true">
+
+                  <h5>Account registration</h5><hr>
+
+                  <mat-expansion-panel #addpat>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Patient</mat-panel-title>
+                      <mat-panel-description>Patient account registration form</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <!-- <small class="text-mute"ss></small><hr> -->
+                      <app-add-patient-firebase></app-add-patient-firebase>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #adddoc>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Doctor</mat-panel-title>
+                      <mat-panel-description>Doctor account registration form</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <!-- <small class="text-mute"ss></small><hr> -->
+                      <app-add-doctor-firebase></app-add-doctor-firebase>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel #addad>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>Admin</mat-panel-title>
+                      <mat-panel-description>Admin account registration form</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                      <!-- <small class="text-mute"ss></small><hr> -->
+                      <app-add-admin-firebase></app-add-admin-firebase>
+                    </ng-template>
+                  </mat-expansion-panel>
+
+                </mat-accordion>
+              </div>
+            </div>
+          </mat-card-content>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+</div>

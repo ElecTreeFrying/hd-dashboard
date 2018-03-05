@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col mt-3">
+    <button mat-icon-button (click)="onBack()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <!-- <button mat-icon-button (click)="onNext()"><mat-icon>keyboard_arrow_right</mat-icon></button> -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3">
+
+    <mat-card class="mb-5 mt-3">
+      <div class="row">
+        <div class="col">
+          <mat-card-content>
+
+            <p><strong>Patient name: </strong><br>{{ patientName }}</p>
+            <p><strong>Patient number: </strong><br>{{ patientNumber }}</p>
+            <p><strong>emailaddress: </strong><br>{{ patientEmail }}</p>
+            <p><strong>Doctor/s assigned: </strong><br>
+              <span *ngFor="let doctor of patientDoctors; let i = index">
+                <strong>{{ i + 1 }}.</strong> {{ doctor.doctorName }}<br>
+              </span>
+            </p>
+
+          </mat-card-content>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+  <div class="col">
+
+    <mat-card class="mb-5 mt-3">
+      <div class="row">
+        <div class="col">
+          <mat-card-content>
+
+            <canvas #myChart></canvas>
+
+          </mat-card-content>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+</div>

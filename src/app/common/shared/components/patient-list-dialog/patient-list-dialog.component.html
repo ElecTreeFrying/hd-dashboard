@@ -1,0 +1,26 @@
+<div class="p-2" data-container>
+  <h3>Patient list</h3>
+  <mat-card>
+    <mat-card-content>
+
+      <!-- <div *ngFor="let item of list"> -->
+      <div *ngFor="let patient of patients | async; let i = index">
+        <br>
+        <div class="row">
+          <div class="col-4">
+            <h6>
+              Patient #{{ i + 1 }}
+              <button mat-icon-button color="primary" (click)="onSetime(patient)"
+                [matTooltip]="'Set device time'" [matTooltipPosition]="'above'"><mat-icon>alarm_add</mat-icon></button>
+            </h6>
+          </div>
+          <div class="col">
+            <h6>Patient name: {{ patient.patientName }}</h6>
+            <h6>Patient no: {{ patient.patientNumber }}</h6>
+            <h6>Patient email: {{ patient.patientNumber }}</h6>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

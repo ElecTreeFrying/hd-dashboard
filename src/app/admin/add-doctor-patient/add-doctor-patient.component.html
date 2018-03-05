@@ -1,0 +1,48 @@
+<form (ngSubmit)="onAddDoctor()" [formGroup]="doctorForm">
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field>
+        <mat-label>Patient No.</mat-label>
+        <input matInput [matAutocomplete]="reactiveDoctorAuto" formControlName="patientNumber">
+        <mat-autocomplete #reactiveDoctorAuto="matAutocomplete" [displayWith]="displayFnPatient">
+          <mat-option *ngFor="let patient of reactivePatient | async" [value]="patient.patientNumber">
+            <span>{{ patient.patientName }}</span>
+            <span> ({{ patient.patientNumber }}) </span>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="doctorForm.get('patientNumber').invalid">
+          <mat-error *ngIf="doctorForm.get('patientNumber').errors['required']">This is required.</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <mat-form-field>
+        <mat-label>Doctor Name</mat-label>
+        <input matInput [matAutocomplete]="reactivePatientAuto" formControlName="doctorNumber">
+        <mat-autocomplete #reactivePatientAuto="matAutocomplete" [displayWith]="displayFnDoctor">
+          <mat-option *ngFor="let doctor of reactiveDoctor | async" [value]="doctor.doctorName">
+            <span>{{ doctor.doctorName }}</span>
+            <span> ({{ doctor.doctorNumber }}) </span>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error data-error *ngIf="doctorForm.get('doctorNumber').invalid">
+          <mat-error *ngIf="doctorForm.get('doctorNumber').errors['required']">This is required.</mat-error>
+          <div *ngIf="!doctorForm.get('doctorNumber').errors['required']">
+            <mat-error *ngIf="doctorForm.get('doctorNumber').errors['pattern']">Please enter a valid name.</mat-error>
+            <div *ngIf="!doctorForm.get('doctorNumber').errors['pattern']">
+              <mat-error *ngIf="doctorForm.get('doctorNumber').invalid">Patient name too short.</mat-error>
+              <div *ngIf="!doctorForm.get('doctorNumber').invalid">
+                <mat-error *ngIf="doctorForm.get('doctorNumber').errors['pattern']">Please enter a valid name.</mat-error>
+              </div>
+            </div>
+          </div>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <div btn-container class="d-flex">
+        <button mat-raised-button color="accent" class="ml-auto" type="submit">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</form>
