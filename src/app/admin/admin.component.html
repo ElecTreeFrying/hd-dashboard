@@ -4,8 +4,9 @@
     <mat-card class="my-5">
       <div class="row">
         <div class="col">
-          <button mat-raised-button color="accent" class="mr-3" (click)="onCollapsePanels()" *ngIf="!isExpand">COLLAPSE ALL PANELS</button>
-          <button mat-raised-button color="accent" class="mr-3" (click)="onExpandPanels()" *ngIf="isExpand">EXPAND ALL PANELS</button>
+          <button mat-raised-button color="warn" class="mr-3" (click)="refresh()">RELOAD PAGE</button>
+          <button mat-raised-button color="primary" class="mr-3" (click)="onCollapsePanels()" *ngIf="!isExpand">COLLAPSE ALL PANELS</button>
+          <button mat-raised-button color="primary" class="mr-3" (click)="onExpandPanels()" *ngIf="isExpand">EXPAND ALL PANELS</button>
         </div>
       </div>
       <br>

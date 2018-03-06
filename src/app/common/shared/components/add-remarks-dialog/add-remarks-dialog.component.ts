@@ -27,8 +27,10 @@ export class AddRemarksDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private dbFirebaseService: DbFirebaseService, private authFirebaseService: AuthFirebaseService) { }
 
   ngOnInit() {
+    const name = this.data[0].patientName;
+    const number = this.data[0].patientNumber;
     this.remarksForm = new FormGroup({
-      'patientnumber': new FormControl(null, [Validators.required]),
+      'patientnumber': new FormControl(`${name} (${number})`, [Validators.required]),
       'remarks': new FormControl(null, [Validators.required])
     });
 
@@ -40,7 +42,6 @@ export class AddRemarksDialogComponent implements OnInit {
         map(val => this.displayFnPatient(val)),
         map(name => this.filterPatients(name))
       );
-
   }
 
   displayFnPatient(value: any): string {
@@ -54,6 +55,10 @@ export class AddRemarksDialogComponent implements OnInit {
   private _filter(users: any, val: string) {
     const filterValue = val.toLowerCase();
     return users.filter(user => user.patientName.toLowerCase().startsWith(filterValue));
+  }
+
+  clearField() {
+    this.remarksForm.reset();
   }
 
   onAddRemarks() {

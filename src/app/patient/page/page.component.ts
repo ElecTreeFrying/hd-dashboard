@@ -1,7 +1,10 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Data } from '@angular/router';
-
+import { MatDialog } from '@angular/material';
 import * as Chart from 'chart.js';
+
+import { MessageDoctorDialogComponent } from "../../common/shared/components/message-doctor-dialog/message-doctor-dialog.component";
+import { HardwareIssuesDialogComponent } from "../../common/shared/components/hardware-issues-dialog/hardware-issues-dialog.component";
 
 
 @Component({
@@ -17,7 +20,7 @@ export class PageComponent implements OnInit {
   patientNumber: string;
   patientDoctors: any;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.chart();
@@ -26,9 +29,16 @@ export class PageComponent implements OnInit {
       this.patientName = response['0'].patientName;
       this.patientEmail = response['0'].patientEmail;
       this.patientNumber = response['0'].patientNumber;
-      // this.patientDoctor = response['0'].doctorName;
       this.patientDoctors = response[0].response2
     });
+  }
+
+  messageDoctor() {
+    this.dialog.open(MessageDoctorDialogComponent);
+  }
+
+  openHardwareIssues() {
+    this.dialog.open(HardwareIssuesDialogComponent);
   }
 
   onBack() {

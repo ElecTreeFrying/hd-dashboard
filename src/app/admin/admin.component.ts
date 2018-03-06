@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
 import { MatExpansionPanel } from '@angular/material';
 
 
@@ -12,6 +11,7 @@ export class AdminComponent implements OnInit {
 
   @ViewChild('patgen') pat_gen: MatExpansionPanel;
   @ViewChild('docgen') doc_gen: MatExpansionPanel;
+  @ViewChild('gengen') gen_gen: MatExpansionPanel;
   @ViewChild('patlist') pat_list: MatExpansionPanel;
   @ViewChild('doclist') doc_list: MatExpansionPanel;
   @ViewChild('adlist') ad_list: MatExpansionPanel;
@@ -23,17 +23,19 @@ export class AdminComponent implements OnInit {
 
   isExpand: boolean = true;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {
-    this.route.data.subscribe( (response: Data) => {
-        // console.log(response);
-    });
+  }
+
+  refresh() {
+    window.location.reload();
   }
 
   onCollapsePanels() {
     this.pat_gen.close();
     this.doc_gen.close();
+    this.gen_gen.close();
     this.pat_list.close();
     this.doc_list.close();
     this.ad_list.close();
@@ -48,6 +50,7 @@ export class AdminComponent implements OnInit {
   onExpandPanels() {
     this.pat_gen.open();
     this.doc_gen.open();
+    this.gen_gen.open();
     this.pat_list.open();
     this.doc_list.open();
     this.ad_list.open();

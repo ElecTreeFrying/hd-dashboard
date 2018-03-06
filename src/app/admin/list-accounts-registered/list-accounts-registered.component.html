@@ -12,9 +12,9 @@
 
           <div class="row">
             <div class="col-12">
+              <button mat-raised-button color="accent" class="ml-2" (click)="onSearch(true)">SEARCH PATIENT</button>
               <button mat-raised-button color="accent" (click)="onClick(true)" *ngIf="!isClicked">CLICK TO VIEW AND COPY</button>
               <button mat-raised-button color="primary" (click)="onClick(false)" *ngIf="isClicked">CLICK TO COPY ONLY</button>
-              <button mat-raised-button color="accent" class="ml-2" (click)="onSearch(true)">SEARCH PATIENT</button>
             </div>
             <div class="col-12 mt-2">
               <small class="text-muted">Mode: {{ buttonMode }}</small>
@@ -66,9 +66,9 @@
 
           <div class="row">
             <div class="col-12">
+              <button mat-raised-button color="accent" class="ml-2" (click)="onSearch(false)">SEARCH DOCTOR</button>
               <button mat-raised-button color="accent" (click)="onClick(true)" *ngIf="!isClicked">CLICK TO VIEW AND COPY</button>
               <button mat-raised-button color="primary" (click)="onClick(false)" *ngIf="isClicked">CLICK TO COPY ONLY</button>
-              <button mat-raised-button color="accent" class="ml-2" (click)="onSearch(false)">SEARCH DOCTOR</button>
             </div>
             <div class="col-12 mt-2">
               <small class="text-muted">Mode: {{ buttonMode }}</small>
@@ -83,9 +83,9 @@
                       ngxClipboard [cbContent]="doctor.doctorName"
                       [matTooltip]="'copy to clipboard'" [matTooltipPosition]="'below'"
                       (click)="onClipboard(false, { type: 'name', value: doctor.doctorName, action: false, data: doctor })"><mat-icon>content_copy</mat-icon></button>
-                    <button mat-icon-button *ngIf="isClicked"
+                    <!-- <button mat-icon-button *ngIf="isClicked"
                       ngxClipboard [cbContent]="doctor.doctorName"
-                      (click)="onClipboard(false, { type: 'name', value: doctor.doctorName, action: true, data: doctor })"><mat-icon>fullscreen</mat-icon></button>
+                      (click)="onClipboard(false, { type: 'name', value: doctor.doctorName, action: true, data: doctor })"><mat-icon>fullscreen</mat-icon></button> -->
                     {{ doctor.doctorName }}
                   </p>
                 </mat-list-item>

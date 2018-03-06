@@ -8,7 +8,7 @@
 
           <mat-label>Patient No.</mat-label>
 
-          <input matInput [matAutocomplete]="reactiveAuto" formControlName="patientnumber">
+          <input matInput [matAutocomplete]="reactiveAuto" formControlName="patientnumber" (click)="clearField()">
 
           <mat-autocomplete #reactiveAuto="matAutocomplete" [displayWith]="displayFnPatient">
             <mat-option *ngFor="let patient of reactivePatient | async" [value]="patient.patientNumber">

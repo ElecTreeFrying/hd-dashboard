@@ -22,7 +22,7 @@ export class RemarksComponent implements OnInit {
     this.route.data.subscribe((response: any) => {
       response['0'].subscribe((response2) => {
         this.remarks = response2;
-        this.remarks = this.remarks.filter((el) => el !== undefined);
+        this.remarks = this.remarks.filter((el) => el !== undefined).reverse();
       });
     });
   }
