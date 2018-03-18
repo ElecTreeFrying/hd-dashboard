@@ -1,10 +1,11 @@
-<div class="row mt-5 my-2">
-  <div class="col">
-    <h2>Patient readings list</h2>
+<div class="row">
+  <div class="col mt-3">
+    <!-- <button mat-icon-button (click)="onBack()"><mat-icon>keyboard_arrow_left</mat-icon></button> -->
+    <!-- <button mat-icon-button (click)="onNext()"><mat-icon>keyboard_arrow_right</mat-icon></button> -->
   </div>
 </div>
 
-<div class="row">
+<div class="row mt-3">
   <div class="col">
 
     <mat-card class="mb-5">
@@ -15,7 +16,7 @@
             <mat-accordion [displayMode]="'default'">
 
               <div *ngFor="let patient of patientDetails | async">
-                <mat-expansion-panel>
+                <mat-expansion-panel (opened)="onExpandPanel(patient.patientNumber)">
                   <mat-expansion-panel-header>{{ patient.patientName }} - No. {{ patient.patientNumber }}</mat-expansion-panel-header>
                   <mat-card class="mb-5 mt-3">
                     <div class="row">
@@ -40,13 +41,20 @@
                       <div class="col-12">
                         <mat-card-content>
 
-                          <canvas #myChart></canvas>
+                          <!-- <canvas #myChart></canvas> -->
 
                           <br>
-                          <small><strong>Note:</strong></small>
+                          <!-- <small><strong>Note:</strong></small>
                           <p>NaN = device reading timestamp</p>
-                          <p>Device reading / patient-data here</p>
-                          <!-- <br> -->
+                          <p>Device reading / patient-data here</p> -->
+                          <small><strong>TODO: Revice card-layout & data-display</strong></small>
+                          <p><strong>Most recent readings</strong></p>
+                          <br>
+                          <p>Patient no. <strong>{{ patientReading?.patientNo }}</strong></p>
+                          <br>
+                          <p>DBP: <strong>{{ patientReading?.dbpVal }}</strong></p>
+                          <p>SBP: <strong>{{ patientReading?.sbpVal }}</strong></p>
+                          <p>HR: <strong>{{ patientReading?.hrVal }}</strong></p>
 
                         </mat-card-content>
                       </div>

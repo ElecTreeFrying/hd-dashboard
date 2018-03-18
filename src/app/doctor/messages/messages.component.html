@@ -11,8 +11,8 @@
       <mat-card-content>
         <mat-list dense>
           <h3 mat-subheader>Date and time</h3>
-          <div *ngFor="let item of remarks; let i = index">
-            <mat-list-item class="my-2">{{ item?.timestamp }}</mat-list-item>
+          <div *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]; let i = index">
+            <mat-list-item class="my-2">{{ i }}</mat-list-item>
           </div>
         </mat-list>
       </mat-card-content>
@@ -20,24 +20,17 @@
     <div class="col">
       <mat-card-content>
         <mat-list dense>
-          <h3 mat-subheader>Doctor's Remarks</h3>
-          <div *ngFor="let item of remarks; let i = index">
-            <mat-list-item class="my-2">{{ item?.message | shorten: 53: ' ...' }}</mat-list-item>
-          </div>
-        </mat-list>
-      </mat-card-content>
-    </div>
-    <div class="col-1">
-      <mat-card-content>
-        <mat-list dense>
-          <h3 mat-subheader> </h3>
-          <div *ngFor="let item of remarks; let i = index">
+          <h3 mat-subheader>Patient Name</h3>
+          <div *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]; let i = index">
+            <!-- <mat-list-item class="my-2">{{ i }}</mat-list-item> -->
             <mat-list-item class="my-2">
-              <button mat-icon-button (click)="openDoctorsRemarks(item)"><mat-icon>fullscreen</mat-icon></button>
+              <p>feature-todo</p>
+              <button mat-icon-button class="ml-auto"><mat-icon>fullscreen</mat-icon></button>
             </mat-list-item>
           </div>
         </mat-list>
       </mat-card-content>
     </div>
+
   </div>
 </mat-card>

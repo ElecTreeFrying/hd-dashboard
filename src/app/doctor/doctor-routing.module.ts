@@ -9,7 +9,9 @@ import { DoctorsPatientsResolver } from "../common/core/services/doctors-patient
 
 const routes: Routes = [
   { path: '', component: DoctorComponent, canActivateChild: [ DoctorGuard ], resolve: [ DoctorsPatientsResolver ], children: [
-    { path: '', loadChildren: './dashboardDoctor/dashboard.module#DashboardModuleDoctor' },
+    { path: '', loadChildren: './readings/readings.module#ReadingsModule' },
+    { path: 'readings', loadChildren: './readings/readings.module#ReadingsModule' },
+    { path: 'messages', loadChildren: './messages/messages.module#MessagesModule' },
   ] }
 ];
 

@@ -9,10 +9,10 @@ import { RemarksResolver } from "./remarks/remarks.resolver";
 
 const routes: Routes = [
   { path: '', component: PatientComponent, canActivateChild: [ PatientGuard ], children: [
-    { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-    { path: 'doctors-remarks', loadChildren: './remarks/remarks.module#RemarksModule', resolve: [ RemarksResolver ] },
+    { path: '', loadChildren: './page/page.module#PageModule', resolve: [ PageResolver ] },
     { path: 'vital-signs', loadChildren: './page/page.module#PageModule', resolve: [ PageResolver ] },
-    { path: 'user-manual', loadChildren: './manual/manual.module#ManualModule' }
+    { path: 'doctors-remarks', loadChildren: './remarks/remarks.module#RemarksModule', resolve: [ RemarksResolver ] },
+    { path: 'user-manual', loadChildren: './manual/manual.module#ManualModule' },
   ] },
 ];
 

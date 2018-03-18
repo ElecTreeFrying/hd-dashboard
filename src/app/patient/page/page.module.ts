@@ -8,6 +8,9 @@ import { HardwareIssuesDialogComponent } from "../../common/shared/components/ha
 import { MessageDoctorDialogComponent } from "../../common/shared/components/message-doctor-dialog/message-doctor-dialog.component";
 import { PageComponent } from './page.component';
 
+import { DbFirebaseService0 } from "../../common/core/services/db-firebase0.service";
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,6 +25,9 @@ import { PageComponent } from './page.component';
   entryComponents: [
     HardwareIssuesDialogComponent,
     MessageDoctorDialogComponent,
+  ],
+  providers: [
+    DbFirebaseService0
   ]
 })
 export class PageModule { }

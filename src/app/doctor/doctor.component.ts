@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, Data } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { AddRemarksDialogComponent } from "../common/shared/components/add-remarks-dialog/add-remarks-dialog.component";
@@ -18,9 +18,15 @@ export class DoctorComponent implements OnInit {
   patientListDialogRef: MatDialogRef<PatientListDialogComponent>;
   accountDetailsDialogRef: MatDialogRef<AccountDetailsDialogComponent>;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) { }
+  tabLinks = [
+    { label: 'Readings', link: 'readings' },
+    { label: 'Messages', link: 'messages' },
+  ];
+
+  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.router.navigate(['readings'], { relativeTo: this.route });
   }
 
   addRemarks() {

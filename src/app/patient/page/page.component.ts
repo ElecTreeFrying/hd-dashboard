@@ -6,6 +6,8 @@ import * as Chart from 'chart.js';
 import { MessageDoctorDialogComponent } from "../../common/shared/components/message-doctor-dialog/message-doctor-dialog.component";
 import { HardwareIssuesDialogComponent } from "../../common/shared/components/hardware-issues-dialog/hardware-issues-dialog.component";
 
+import { DbFirebaseService0 } from "../../common/core/services/db-firebase0.service";
+
 
 @Component({
   selector: 'app-page',
@@ -19,18 +21,34 @@ export class PageComponent implements OnInit {
   patientEmail: string;
   patientNumber: string;
   patientDoctors: any;
+  patientReading: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog, private dbFirebaseService0: DbFirebaseService0) { }
 
   ngOnInit() {
-    this.chart();
-
     this.route.data.subscribe((response: Data) => {
       this.patientName = response['0'].patientName;
       this.patientEmail = response['0'].patientEmail;
       this.patientNumber = response['0'].patientNumber;
       this.patientDoctors = response[0].response2
     });
+
+    this.dbFirebaseService0.getPatientReadings.subscribe((response) => {
+      response.forEach((el) => {
+        const blank = {};
+        const newData = el.split(' ');
+
+        newData.forEach((el) => {
+          const newEl = el.split('/');
+          blank[newEl[0]] = newEl[1];
+        })
+
+        blank['patientNo'] === this.patientNumber ? this.patientReading = blank : 0;
+      })
+
+      this.chart();
+    })
+
   }
 
   messageDoctor() {
@@ -53,65 +71,35 @@ export class PageComponent implements OnInit {
     const chart = new Chart(this.myChart.nativeElement, {
       type: 'bar',
           data: {
-              labels: ["SBP", "DBP", "HR", "PTT", "ECG", "PPG"],
+              labels: ["Patient readings"],
               datasets: [{
-                  label: 'yaba',
-                  data: [5, -9, -5, -7, 5 ,2],
+                  label: 'SBP',
+                  data: [this.patientReading.sbpVal],
                   backgroundColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
+                    'blue',
                   ],
                   borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)',
-                    'rgba(255,99,132,1)'
+                    'blue',
                   ],
                   borderWidth: 1
               }, {
-                  label: 'baba',
-                  data: [3, -6, 8 ,2 , -4, -9],
+                  label: 'DBP',
+                  data: [this.patientReading.dbpVal],
                   backgroundColor: [
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
+                    'red',
                   ],
                   borderColor: [
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 159, 64, 1)',
+                    'red',
                   ],
                   borderWidth: 1
               }, {
-                  label: 'abba',
-                  data: [-6, 8, -2, 4, -9, 2],
+                  label: 'HR',
+                  data: [this.patientReading.hrVal],
                   backgroundColor: [
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
+                    'green',
                   ],
                   borderColor: [
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
+                    'green',
                   ],
                   borderWidth: 1
               }]

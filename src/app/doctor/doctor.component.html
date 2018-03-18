@@ -11,7 +11,7 @@
                 <button mat-raised-button color="accent" class="w-100 mb-3" (click)="addRemarks()">ADD REMARKS</button>
               </div>
               <div class="col-12">
-                <button mat-raised-button color="accent" class="w-100 mb-3" (click)="showPatientList()">PATIENT LIST</button>
+                <button mat-raised-button color="accent" class="w-100 mb-3" (click)="showPatientList()">SET DEVICE TIME</button>
               </div>
               <div class="col-12">
                 <button mat-raised-button color="accent" class="w-100" (click)="accountDetails()">ACCOUNT DETAILS</button>
@@ -24,6 +24,17 @@
     </div>
   </div>
   <div class="col">
+
+    <nav mat-tab-nav-bar>
+      <p mat-tab-link class="m-0 mt-5"
+        *ngFor="let tabLink of tabLinks"
+        [routerLink]="tabLink.link"
+        routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">
+        {{tabLink.label}}
+      </p>
+    </nav>
+
     <router-outlet></router-outlet>
   </div>
 </div>

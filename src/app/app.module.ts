@@ -13,6 +13,7 @@ import { AdminAuthDialogComponent } from "./common/shared/components/admin-auth-
 
 import { AuthFirebaseService } from "./common/core/services/auth-firebase.service";
 import { DbFirebaseService } from "./common/core/services/db-firebase.service";
+import { DbFirebaseService0 } from "./common/core/services/db-firebase0.service";
 import { SharedService } from "./common/core/services/shared.service";
 
 
@@ -39,7 +40,8 @@ import { SharedService } from "./common/core/services/shared.service";
   providers: [
     AuthFirebaseService,
     DbFirebaseService,
-    SharedService
+    DbFirebaseService0,
+    SharedService,
   ],
   bootstrap: [
     AppComponent

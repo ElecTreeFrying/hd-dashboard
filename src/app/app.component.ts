@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
           ? false : true;
 
         route.url === '/'
-          ? setTimeout(() => { this.openOptionDialog() }, 1000)
+          ? setTimeout(() => { this.openOptionDialog(); this.authFirebaseService.signOutUser(false); }, 1000)
           : 0;
       }
     });
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
   }
 
   onSignout() {
-    this.authFirebaseService.signOutUser();
+    this.authFirebaseService.signOutUser(true);
   }
 
 }

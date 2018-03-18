@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Subscription } from 'rxjs/Subscription';
 
 import { DbFirebaseService } from "./db-firebase.service";
 import { SharedService } from "./shared.service";
@@ -78,12 +77,13 @@ export class AuthFirebaseService {
     return this.fb.auth.signInWithEmailAndPassword(email, password)
   }
 
-  signOutUser() {
+  signOutUser(option: boolean) {
     this.fb.auth.signOut()
       .then(() => {
         const message = 'Signed out successfully.';
-        this.sharedService.openSnackbar(message, 3500);
         this.router.navigate(['/']);
+        if (option !== true) return;
+        this.sharedService.openSnackbar(message, 3500);
       }).catch((e) => {
         const message = 'Error occured please try again.';
         this.sharedService.openSnackbar(message, 3500);

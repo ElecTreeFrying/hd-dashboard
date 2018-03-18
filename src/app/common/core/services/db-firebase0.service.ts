@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import * as _ from 'lodash';
-
-import { SharedService } from "./shared.service";
 
 
 @Injectable()
@@ -13,11 +10,13 @@ export class DbFirebaseService0 {
   patientDetailsRef: AngularFireList<any>;
   doctorDetailsRef: AngularFireList<any>;
   adminDetailsRef: AngularFireList<any>;
+  patientReadingsRef: AngularFireList<any>;
 
-  constructor(private fb: AngularFireAuth, private db: AngularFireDatabase, private sharedService: SharedService) {
+  constructor(private fb: AngularFireAuth, private db: AngularFireDatabase) {
     this.patientDetailsRef = this.db.list<any>('patient-list-DETAILS');
     this.doctorDetailsRef = this.db.list<any>('doctor-list-DETAILS');
     this.adminDetailsRef = this.db.list<any>('admin-list-DETAILS');
+    this.patientReadingsRef = this.db.list<any>('patient-readings');
   }
 
   getPatientDetails(uid: string) {
@@ -50,6 +49,10 @@ export class DbFirebaseService0 {
 
   get getAdminList() {
     return this.adminDetailsRef.valueChanges();
+  }
+
+  get getPatientReadings() {
+    return this.patientReadingsRef.valueChanges();
   }
 
   getPatientsDoctors(data: any) {
