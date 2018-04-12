@@ -6,7 +6,6 @@ import { RemarksRoutingModule } from './remarks-routing.module';
 import { Material2Module } from "../../common/core/modules/material2.module";
 
 import { RemarksComponent } from './remarks.component';
-import { DoctorsRemarksDialogComponent } from "../../common/shared/components/doctors-remarks-dialog/doctors-remarks-dialog.component";
 
 
 @NgModule({
@@ -18,10 +17,6 @@ import { DoctorsRemarksDialogComponent } from "../../common/shared/components/do
   ],
   declarations: [
     RemarksComponent,
-    DoctorsRemarksDialogComponent,
   ],
-  entryComponents: [
-    DoctorsRemarksDialogComponent
-  ]
 })
 export class RemarksModule { }

@@ -8,6 +8,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgModule } from '@angular/core';
 import 'hammerjs';
 
+import { DoctorsRemarksDialogComponent } from './common/shared/components/doctors-remarks-dialog/doctors-remarks-dialog.component';
+
 import { environment } from '../environments/environment';
 
 const firebaseConfig = environment.firebaseConfig;
@@ -18,7 +20,12 @@ const firebaseConfig = environment.firebaseConfig;
     CommonModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  declarations: [],
+  declarations: [
+    DoctorsRemarksDialogComponent
+  ],
+  entryComponents: [
+    DoctorsRemarksDialogComponent
+  ],
   exports: [
     CommonModule,
     BrowserAnimationsModule,
