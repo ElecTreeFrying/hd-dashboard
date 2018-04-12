@@ -32,6 +32,7 @@ export class ReadingsComponent implements OnInit {
 
   ngOnInit() {
     const currentUserId = this.authFirebaseService.currentUserId;
+
     this.dbFirebaseService.doctorDetailsRef.valueChanges().subscribe((response: any) => {
       response.forEach((el, i) => {
         if (el.doctorUid === currentUserId) {
@@ -41,17 +42,14 @@ export class ReadingsComponent implements OnInit {
       });
     });
 
-    // this.sharedService.data();
-    // this.sharedService.push();
+    this.sharedService.data();
   }
 
   onExpandPanel(patientNo: string) {
-    console.log(patientNo);
-
     this.dbFirebaseService0.getPatientReadings.subscribe((response) => {
-      console.log(response);
-      response.forEach((el) => {
-        // console.log(el);
+
+      response.map((el) => {
+
         const blank = {};
         const newData = el.split(' ');
 
@@ -60,12 +58,24 @@ export class ReadingsComponent implements OnInit {
           blank[newEl[0]] = newEl[1];
         })
 
-        // blank['patientNo'] === patientNo ? this.patientReading = blank : 0;
+        if (blank['patientNo'] === patientNo) {
+          return blank;
+          // this.patientReading = blank;
+        }
+      }).filter(el => el !== undefined)
+
+      response.forEach((el) => {
+
+        const blank = {};
+        const newData = el.split(' ');
+
+        newData.forEach((el) => {
+          const newEl = el.split('/');
+          blank[newEl[0]] = newEl[1];
+        })
+
         if (blank['patientNo'] === patientNo) {
           this.patientReading = blank;
-          // console.log('matched');
-          // console.log(blank['patientNo']);
-          // console.log(patientNo]);
         }
       })
     });

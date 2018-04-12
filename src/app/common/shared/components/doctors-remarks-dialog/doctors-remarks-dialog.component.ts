@@ -9,9 +9,16 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DoctorsRemarksDialogComponent implements OnInit {
 
+  timestamp: string = '';
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+    let newTimestamp = this.data.remarks.timestamp;
+    newTimestamp = newTimestamp.substring(4, newTimestamp.length).trim().split(' ');
+    newTimestamp = newTimestamp.map((el, i) => { if (i < 3) return el; });
+    newTimestamp = newTimestamp.filter((el) => el !== undefined);
+    this.timestamp = newTimestamp.join(' ');
   }
 
 }

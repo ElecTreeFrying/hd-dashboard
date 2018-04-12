@@ -19,7 +19,7 @@
     <div class="col-12">
       <mat-form-field>
         <mat-label>Time Intervals Between</mat-label>
-        <mat-select formControlName="between">
+        <mat-select formControlName="between" [disabled]="isDisabledInterval">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let value of between" [value]="value">
             <div *ngIf="value === 0.5">{{ value + ' hr' }}</div>
@@ -33,7 +33,7 @@
       </mat-form-field>
     </div>
     <div class="col-12 mt-3">
-      <button mat-raised-button color="accent" type="submit">SAVE</button>
+      <button mat-raised-button color="accent" type="submit" [disabled]="isDisabledButton">SAVE</button>
     </div>
   </div>
 </form>

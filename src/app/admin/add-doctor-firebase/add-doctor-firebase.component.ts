@@ -40,7 +40,6 @@ export class AddDoctorFirebaseComponent implements OnInit {
 
     this.authFirebaseService.createDoctor(doctorDetails)
 
-    console.log(form);
     this.doctorForm.reset();
   }
 }

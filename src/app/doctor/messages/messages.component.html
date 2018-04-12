@@ -11,8 +11,8 @@
       <mat-card-content>
         <mat-list dense>
           <h3 mat-subheader>Date and time</h3>
-          <div *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]; let i = index">
-            <mat-list-item class="my-2">{{ i }}</mat-list-item>
+          <div *ngFor="let item of messages | async">
+            <mat-list-item class="my-2">{{ item?.timestamp }}</mat-list-item>
           </div>
         </mat-list>
       </mat-card-content>
@@ -21,11 +21,11 @@
       <mat-card-content>
         <mat-list dense>
           <h3 mat-subheader>Patient Name</h3>
-          <div *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]; let i = index">
+          <div *ngFor="let item of messages | async">
             <!-- <mat-list-item class="my-2">{{ i }}</mat-list-item> -->
             <mat-list-item class="my-2">
-              <p>feature-todo</p>
-              <button mat-icon-button class="ml-auto"><mat-icon>fullscreen</mat-icon></button>
+              <p class="m-0">{{ item?.patientName }}</p>
+              <button mat-icon-button class="ml-auto" (click)="openMessage(item)"><mat-icon>fullscreen</mat-icon></button>
             </mat-list-item>
           </div>
         </mat-list>

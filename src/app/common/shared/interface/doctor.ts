@@ -5,6 +5,13 @@ export interface IDoctorsRemarks {
   timestamp: string,
 }
 
+export interface IPatientRemarks {
+  doctorNumber: string,
+  message: string,
+  patientName: string,
+  timestamp: string,
+}
+
 export interface ISettime {
   duration: string,
   between: string,

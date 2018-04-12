@@ -17,6 +17,8 @@ export class SetTimeDialogComponent implements OnInit {
   between = [];
 
   settimeForm: FormGroup;
+  isDisabledInterval: boolean = true;
+  isDisabledButton: boolean = true;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private dbFirebaseService: DbFirebaseService) { }
 
@@ -27,6 +29,16 @@ export class SetTimeDialogComponent implements OnInit {
     });
 
     this.initBetween();
+
+    this.settimeForm.valueChanges.subscribe((response) => {
+
+      const duration = !(response.duration === undefined || response.duration === null);
+      const interval = !(response.between === undefined || response.between === null);
+
+      this.isDisabledInterval = duration ? false : true;
+      this.isDisabledButton = duration && interval ? false : true;
+
+    });
   }
 
   initBetween() {
@@ -44,7 +56,8 @@ export class SetTimeDialogComponent implements OnInit {
     ]
   }
 
-  onChange(value: any) {
+  onChange(value: number) {
+    if (value === undefined) return;
     this.initBetween();
     const filtered = this.between.filter(el => el.number === value);
     this.between = filtered[0].numbers;

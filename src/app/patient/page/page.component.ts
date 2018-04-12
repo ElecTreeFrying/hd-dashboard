@@ -52,7 +52,7 @@ export class PageComponent implements OnInit {
   }
 
   messageDoctor() {
-    this.dialog.open(MessageDoctorDialogComponent);
+    this.dialog.open(MessageDoctorDialogComponent, { data: this.patientDoctors });
   }
 
   openHardwareIssues() {

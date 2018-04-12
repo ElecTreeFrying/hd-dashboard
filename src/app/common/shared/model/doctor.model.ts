@@ -14,6 +14,15 @@ class DoctorPatient {
   ) {}
 }
 
+export class PatientRemarks {
+  constructor(
+    public doctorNumber: string,
+    public message: string,
+    public patientName: string,
+    public timestamp: string,
+  ) {}
+}
+
 export class DoctorRemarks {
   constructor(
     public patientNumber: string,

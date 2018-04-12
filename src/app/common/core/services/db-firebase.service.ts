@@ -4,7 +4,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as moment from 'moment';
 import * as firebase from 'firebase';
 
-import { IDoctorsRemarks, ISettime } from "../../shared/interface/doctor";
+import { IDoctorsRemarks, IPatientRemarks, ISettime } from "../../shared/interface/doctor";
 import { IPatientDetails } from "../../shared/interface/patient";
 import { IDoctorDetails } from "../../shared/interface/doctor";
 import { IAdminDetails } from "../../shared/interface/admin";
@@ -17,12 +17,14 @@ export class DbFirebaseService {
 
   reference: AngularFireList<any>;
   addRemarkRef: AngularFireList<any>;
+  addPatientRemarkRef: AngularFireList<any>;
   patientDetailsRef: AngularFireList<any>;
   doctorDetailsRef: AngularFireList<any>;
   adminDetailsRef: AngularFireList<any>;
 
   constructor(private fb: AngularFireAuth, private db: AngularFireDatabase, private sharedService: SharedService) {
     this.addRemarkRef = this.db.list<any>('doctors-remarks');
+    this.addPatientRemarkRef = this.db.list<any>('patients-remarks');
     this.patientDetailsRef = this.db.list<any>('patient-list-DETAILS');
     this.doctorDetailsRef = this.db.list<any>('doctor-list-DETAILS');
     this.adminDetailsRef = this.db.list<any>('admin-list-DETAILS');
@@ -109,6 +111,32 @@ export class DbFirebaseService {
     return promise.then((doctorName) => doctorName);
   }
 
+  getPatientName(patientUid: string) {
+    const promise = new Promise(
+      (resolve, reject) => {
+        this.patientDetailsRef.valueChanges().subscribe((response: any) => {
+          response.map((el, i) => {
+            if (patientUid === el.patientUid) resolve(el.patientName)
+          });
+        });
+      }
+    );
+
+    return promise.then((patientUid) => patientUid);
+  }
+
+  getPatientsDoctorsDetails(doctorName: any[]) {
+    doctorName = doctorName.map((el) => el.doctorName)
+
+    return this.doctorDetailsRef.snapshotChanges().map(changes => {
+      return changes.map(c => {
+        if (doctorName.includes(c.payload.val().doctorName)) {
+          return { key: c.payload.key, ...c.payload.val() }
+        }
+      }).filter(el => el !== undefined);
+    });
+  }
+
   addRemarks(remark: IDoctorsRemarks) {
     this.patientDetailsRef.valueChanges().subscribe((response) => {
       const isExists = response.find((el) => el.patientNumber === remark.patientNumber);
@@ -116,6 +144,22 @@ export class DbFirebaseService {
         this.addRemarkRef.push(remark)
           .then(() => this.sharedService.openSnackbar(`Remark added to patient no. ${remark.patientNumber}`, 3500));
       } else this.sharedService.openSnackbar(`Patient no. ${remark.patientNumber} does not exists`, 3500);
+    });
+  }
+
+  addPatientMessageToDoctor(remark: IPatientRemarks) {
+    this.doctorDetailsRef.valueChanges().subscribe((response) => {
+      const isExists = response.find((el) => el.doctorNumber === remark.doctorNumber);
+      if (isExists !== undefined) {
+        this.addPatientRemarkRef.push(remark)
+          .then(() => this.sharedService.openSnackbar(`Remark added to doctor no. ${remark.doctorNumber}`, 3500));
+      } else this.sharedService.openSnackbar(`Doctor no. ${remark.doctorNumber} does not exists`, 3500);
+    });
+  }
+
+  get readPatientRemarks() {
+    return this.addPatientRemarkRef.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
   }
 

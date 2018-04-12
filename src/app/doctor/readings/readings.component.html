@@ -31,7 +31,7 @@
                             </div>
                             <div class="col">
                               <small><strong>Emailaddress: </strong>{{ patient.patientEmail }}</small><br>
-                              <small><strong>Timestamp: </strong>NaN</small><br>
+                              <!-- <small><strong>Timestamp: </strong>NaN</small><br> -->
 
                             </div>
                           </div>
@@ -42,19 +42,18 @@
                         <mat-card-content>
 
                           <!-- <canvas #myChart></canvas> -->
-
                           <br>
-                          <!-- <small><strong>Note:</strong></small>
-                          <p>NaN = device reading timestamp</p>
-                          <p>Device reading / patient-data here</p> -->
-                          <small><strong>TODO: Revice card-layout & data-display</strong></small>
-                          <p><strong>Most recent readings</strong></p>
-                          <br>
-                          <p>Patient no. <strong>{{ patientReading?.patientNo }}</strong></p>
-                          <br>
-                          <p>DBP: <strong>{{ patientReading?.dbpVal }}</strong></p>
-                          <p>SBP: <strong>{{ patientReading?.sbpVal }}</strong></p>
-                          <p>HR: <strong>{{ patientReading?.hrVal }}</strong></p>
+                          <div class="row">
+                            <div class="col">
+                              <p>DBP: <strong>{{ patientReading?.dbpVal }}</strong></p>
+                            </div>
+                            <div class="col">
+                              <p>SBP: <strong>{{ patientReading?.sbpVal }}</strong></p>
+                            </div>
+                            <div class="col">
+                              <p>HR: <strong>{{ patientReading?.hrVal }}</strong></p>
+                            </div>
+                          </div>
 
                         </mat-card-content>
                       </div>

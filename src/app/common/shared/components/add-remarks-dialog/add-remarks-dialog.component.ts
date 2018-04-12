@@ -65,12 +65,16 @@ export class AddRemarksDialogComponent implements OnInit {
     if (this.remarksForm.invalid) return;
 
     const form = this.remarksForm.value;
-    const patientno = form['patientnumber'];
     const message = form['remarks'];
+    let patientno = form['patientnumber'];
 
     const timestamp = moment().format('llll');;
 
     const doctorUid = this.authFirebaseService.currentUserId;
+
+    const index = patientno.indexOf('PX');
+    const exclude = patientno.indexOf(')');
+    patientno = patientno.substr(index, 15);
 
     this.dbFirebaseService.getDoctorName(doctorUid)
       .then((doctorName: string) => {

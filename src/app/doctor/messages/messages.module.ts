@@ -5,6 +5,7 @@ import { MessagesRoutingModule } from './messages-routing.module';
 import { Material2Module } from "../../common/core/modules/material2.module";
 
 import { MessagesComponent } from "./messages.component";
+import { DoctorsRemarksDialogComponent } from '../../common/shared/components/doctors-remarks-dialog/doctors-remarks-dialog.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,10 @@ import { MessagesComponent } from "./messages.component";
   ],
   declarations: [
     MessagesComponent,
+    DoctorsRemarksDialogComponent
+  ],
+  entryComponents: [
+    DoctorsRemarksDialogComponent
   ]
 })
 export class MessagesModule { }

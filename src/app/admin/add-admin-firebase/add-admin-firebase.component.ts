@@ -35,7 +35,6 @@ export class AddAdminFirebaseComponent implements OnInit {
 
     this.authFirebaseService.createAdmin(adminDetails);
 
-    console.log(form);
     this.adminAuthForm.reset();
   }
 

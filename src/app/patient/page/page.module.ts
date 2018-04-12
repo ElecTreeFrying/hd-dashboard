@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { Material2Module } from "../../common/core/modules/material2.module";
 
@@ -14,6 +15,7 @@ import { DbFirebaseService0 } from "../../common/core/services/db-firebase0.serv
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     PageRoutingModule,
     Material2Module,
   ],
