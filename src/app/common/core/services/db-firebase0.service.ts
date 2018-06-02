@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
 
 
 @Injectable()
@@ -20,23 +21,27 @@ export class DbFirebaseService0 {
   }
 
   getPatientDetails(uid: string) {
-    return this.patientDetailsRef.snapshotChanges().map((response) => {
-      return response.map((response2) => {
-        const patientUid = response2.payload.val().patientUid;
-        if (patientUid === uid)
-        return { key: response2.payload.key, ...response2.payload.val() };
-      }).filter((response) => response !== undefined);
-    })
+    return this.patientDetailsRef.snapshotChanges().pipe(
+      map((response) => {
+        return response.map((response2) => {
+          const patientUid = response2.payload.val().patientUid;
+          if (patientUid === uid)
+          return { key: response2.payload.key, ...response2.payload.val() };
+        }).filter((response) => response !== undefined);
+      })
+    );
   }
 
   getDoctorDetails(uid: string) {
-    return this.doctorDetailsRef.snapshotChanges().map((response) => {
-      return response.map((response2) => {
-        const doctorUid = response2.payload.val().doctorUid;
-        if (doctorUid === uid)
-          return { key: response2.payload.key, ...response2.payload.val() };
-      }).filter((response) => response !== undefined);
-    })
+    return this.doctorDetailsRef.snapshotChanges().pipe(
+      map((response) => {
+        return response.map((response2) => {
+          const doctorUid = response2.payload.val().doctorUid;
+          if (doctorUid === uid)
+            return { key: response2.payload.key, ...response2.payload.val() };
+        }).filter((response) => response !== undefined);
+      })
+    );
   }
 
   get getPatientList() {

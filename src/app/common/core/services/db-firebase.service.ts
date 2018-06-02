@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import * as firebase from 'firebase';
 
@@ -128,13 +129,15 @@ export class DbFirebaseService {
   getPatientsDoctorsDetails(doctorName: any[]) {
     doctorName = doctorName.map((el) => el.doctorName)
 
-    return this.doctorDetailsRef.snapshotChanges().map(changes => {
-      return changes.map(c => {
-        if (doctorName.includes(c.payload.val().doctorName)) {
-          return { key: c.payload.key, ...c.payload.val() }
-        }
-      }).filter(el => el !== undefined);
-    });
+    return this.doctorDetailsRef.snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(c => {
+          if (doctorName.includes(c.payload.val().doctorName)) {
+            return { key: c.payload.key, ...c.payload.val() }
+          }
+        }).filter(el => el !== undefined);
+      })
+    );
   }
 
   addRemarks(remark: IDoctorsRemarks) {
@@ -158,9 +161,11 @@ export class DbFirebaseService {
   }
 
   get readPatientRemarks() {
-    return this.addPatientRemarkRef.snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
+    return this.addPatientRemarkRef.snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      })
+    );
   }
 
   addSettime(settime: ISettime) {

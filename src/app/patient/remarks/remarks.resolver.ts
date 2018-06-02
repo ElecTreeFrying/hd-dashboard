@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute, Data } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { DbFirebaseService } from "../../common/core/services/db-firebase.service";
 import { AuthFirebaseService } from "../../common/core/services/auth-firebase.service";
@@ -24,14 +25,16 @@ export class RemarksResolver implements Resolve<any> {
     )
 
     return promise.then((pNumber) => {
-      return this.dbFirebaseService.addRemarkRef.snapshotChanges().map((changes) => {
-        return changes.map((snapshot) => {
-          const patientNumber = snapshot.payload.val().patientNumber;
-          if (pNumber === patientNumber) {
-            return { key: snapshot.payload.key, ...snapshot.payload.val() };
-          }
-        });
-      });
+      return this.dbFirebaseService.addRemarkRef.snapshotChanges().pipe(
+        map((changes) => {
+          return changes.map((snapshot) => {
+            const patientNumber = snapshot.payload.val().patientNumber;
+            if (pNumber === patientNumber) {
+              return { key: snapshot.payload.key, ...snapshot.payload.val() };
+            }
+          });
+        })
+      );
     });
   }
 }
