@@ -1,11 +1,15 @@
 # Hyperdetect
 
-[Link](thesis-c714e.firebaseapp.com)
+[https://hyperdetect-data.firebaseapp.com](https://hyperdetect-data.firebaseapp.com)
 
-## feat
+## Patient
 
-Angular
+[https://hyperdetect-patient.firebaseapp.com](https://hyperdetect-patient.firebaseapp.com)
 
-Angular Material2
+## Doctor
 
-angularfire2
+[https://hyperdetect-doctor.firebaseapp.com](https://hyperdetect-doctor.firebaseapp.com)
+
+## Admin
+
+[https://hyperdetect-admin.firebaseapp.com](https://hyperdetect-admin.firebaseapp.com)

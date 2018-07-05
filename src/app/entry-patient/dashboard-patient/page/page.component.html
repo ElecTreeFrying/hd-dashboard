@@ -1,0 +1,94 @@
+<div id="wrapper">
+
+  <div id="col-01">
+
+    <mat-card>
+      <mat-card-content>
+
+        <p>Patient details</p>
+        <div id="spinner" *ngIf="patientDetails === undefined">
+          <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+        </div>
+        <h4>{{ patientDetails?.patientNo }}</h4>
+        <h4>{{ patientDetails?.fullname }}</h4>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+
+        <p>Assigned doctor/s</p>
+        <div id="spinner" *ngIf="isDoctorsLoading">
+          <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+        </div>
+        <mat-nav-list>
+          <mat-list-item *ngFor="let doctor of patientDoctors | async">
+            <h5 mat-line>{{ doctor?.fullname }}</h5>
+            <button mat-icon-button matTooltip="{{ 'Message Dr. ' + doctor?.fullname }}" (click)="messageDoctor(doctor)">
+              <mat-icon>comment</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-nav-list>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <div id="col-02">
+    <mat-card>
+      <mat-card-content>
+
+        <h3>Latest</h3>
+
+        <div id="heading">
+          <span>SBP</span>
+          <span>DBP</span>
+          <span>HR</span>
+        </div>
+        <div id="content">
+          <div id="spinner" *ngIf="readings === undefined">
+            <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+          </div>
+          <h5>{{ readings?.sbpVal }}</h5>
+          <h5>{{ readings?.dbpVal }}</h5>
+          <h5>{{ readings?.hrVal }}</h5>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-divider></mat-divider>
+
+    <h3>Readings History</h3>
+
+    <div id="spinner" *ngIf="readings === undefined">
+      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="readings !== undefined">
+
+      <ng-container matColumnDef="sbp">
+        <th mat-header-cell *matHeaderCellDef> SBP </th>
+        <td mat-cell *matCellDef="let element"> {{element?.sbpVal}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dbp">
+        <th mat-header-cell *matHeaderCellDef> DBP </th>
+        <td mat-cell *matCellDef="let element"> {{element?.dbpVal}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="hr">
+        <th mat-header-cell *matHeaderCellDef> HR </th>
+        <td mat-cell *matCellDef="let element"> {{element?.hrVal}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[6, 10, 30, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

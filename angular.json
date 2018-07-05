@@ -3,22 +3,40 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hyperdetect": {
+    "hd-dashboard": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "inlineStyle": true,
-          "styleext": "scss"
+          "styleext": "scss",
+          "spec": false
+        },
+        "@schematics/angular:class": {
+          "spec": false
+        },
+        "@schematics/angular:directive": {
+          "spec": false
+        },
+        "@schematics/angular:guard": {
+          "spec": false
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        },
+        "@schematics/angular:pipe": {
+          "spec": false
+        },
+        "@schematics/angular:service": {
+          "spec": false
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hyperdetect",
+            "outputPath": "dist/hd-dashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -55,18 +73,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hyperdetect:build"
+            "browserTarget": "hd-dashboard:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "hyperdetect:build:production"
+              "browserTarget": "hd-dashboard:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hyperdetect:build"
+            "browserTarget": "hd-dashboard:build"
           }
         },
         "test": {
@@ -100,7 +118,7 @@
         }
       }
     },
-    "hyperdetect-e2e": {
+    "hd-dashboard-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -108,11 +126,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "hyperdetect:serve"
+            "devServerTarget": "hd-dashboard:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "hyperdetect:serve:production"
+              "devServerTarget": "hd-dashboard:serve:production"
             }
           }
         },
@@ -128,5 +146,5 @@
       }
     }
   },
-  "defaultProject": "hyperdetect"
+  "defaultProject": "hd-dashboard"
 }

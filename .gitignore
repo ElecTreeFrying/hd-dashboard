@@ -1,11 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# api keys
 /src/environments
 
 # compiled output
 /dist
-/dist-server
 /tmp
 /out-tsc
 
@@ -34,12 +32,9 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store

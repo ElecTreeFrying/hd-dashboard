@@ -1,38 +1,59 @@
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgModule } from '@angular/core';
-import 'hammerjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import 'hammerjs'
 
-import { DoctorsRemarksDialogComponent } from './common/shared/components/doctors-remarks-dialog/doctors-remarks-dialog.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatSnackBarModule,
+  MatIconModule,
+  MatOptionModule,
+  MatSelectModule
+} from '@angular/material';
 
-import { environment } from '../environments/environment';
+import { SharedService } from './common/core/service/shared.service';
 
-const firebaseConfig = environment.firebaseConfig;
+import { EntryGuard, ExitGuard } from './common/core/service/route-guards';
 
+import { StartupComponent } from './common/shared/component/startup/startup.component';
+
+import { environment } from "../environments/environment";
 
 @NgModule({
   imports: [
-    CommonModule,
-    AngularFireModule.initializeApp(firebaseConfig)
-  ],
-  declarations: [
-    DoctorsRemarksDialogComponent
-  ],
-  entryComponents: [
-    DoctorsRemarksDialogComponent
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule.enablePersistence(),
   ],
   exports: [
-    CommonModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatOptionModule,
+    MatSelectModule
+  ],
+  declarations: [
+    StartupComponent,
+  ],
+  providers: [
+    SharedService,
+    EntryGuard,
+    ExitGuard
   ]
 })
 export class AppProviderModule { }

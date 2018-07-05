@@ -1,50 +1,61 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppProviderModule } from './app-provider.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppProviderModule } from "./app-provider.module";
-import { Material2Module } from "./common/core/modules/material2.module";
 
 import { AppComponent } from './app.component';
-import { OptionDialogComponent } from "./common/shared/components/option-dialog/option-dialog.component";
-import { PatientAuthDialogComponent } from "./common/shared/components/patient-auth-dialog/patient-auth-dialog.component";
-import { DoctorAuthDialogComponent } from "./common/shared/components/doctor-auth-dialog/doctor-auth-dialog.component";
-import { AdminAuthDialogComponent } from "./common/shared/components/admin-auth-dialog/admin-auth-dialog.component";
 
-import { AuthFirebaseService } from "./common/core/services/auth-firebase.service";
-import { DbFirebaseService } from "./common/core/services/db-firebase.service";
-import { DbFirebaseService0 } from "./common/core/services/db-firebase0.service";
-import { SharedService } from "./common/core/services/shared.service";
+import { LoginMainDialogComponent } from './common/shared/component/login-main-dialog/login-main-dialog.component';
+import { LoginPatientDialogComponent } from './common/shared/component/login-patient-dialog/login-patient-dialog.component';
+import { LoginDoctorDialogComponent } from './common/shared/component/login-doctor-dialog/login-doctor-dialog.component';
+import { LoginAdminDialogComponent } from './common/shared/component/login-admin-dialog/login-admin-dialog.component';
+import { BufferComponent } from './common/shared/component/buffer/buffer.component';
+
+import { AuthService } from './common/core/service/auth.service';
+
+
+import { Router, NavigationStart } from '@angular/router';
+import { map } from 'rxjs/operators'
+
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    OptionDialogComponent,
-    PatientAuthDialogComponent,
-    DoctorAuthDialogComponent,
-    AdminAuthDialogComponent,
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     AppProviderModule,
-    Material2Module,
+    AppRoutingModule
+  ],
+  declarations: [
+    AppComponent,
+    LoginMainDialogComponent,
+    LoginPatientDialogComponent,
+    LoginDoctorDialogComponent,
+    LoginAdminDialogComponent,
+    BufferComponent
   ],
   entryComponents: [
-    OptionDialogComponent,
-    PatientAuthDialogComponent,
-    DoctorAuthDialogComponent,
-    AdminAuthDialogComponent,
+    LoginMainDialogComponent,
+    LoginPatientDialogComponent,
+    LoginDoctorDialogComponent,
+    LoginAdminDialogComponent
   ],
   providers: [
-    AuthFirebaseService,
-    DbFirebaseService,
-    DbFirebaseService0,
-    SharedService,
+    AuthService
   ],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.authService.state.pipe(
+      map((user: any) => user !== null)
+    ).subscribe((state) => {
+      state ? 0 : this.router.navigate(['/']);
+    });
+  }
+}
