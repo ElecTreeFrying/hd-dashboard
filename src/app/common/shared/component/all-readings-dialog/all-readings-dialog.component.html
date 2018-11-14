@@ -11,6 +11,7 @@
   <mat-nav-list>
     <mat-list-item *ngFor="let reading of readings | async">
       <h1 mat-line>
+        <span id="timestamp"> {{ reading?.timestamm }} </span>
         <span> SBP: {{ reading?.sbpVal }} </span>
         <span> DBP: {{ reading?.dbpVal }} </span>
         <span> HR: {{ reading?.hrVal }} </span>

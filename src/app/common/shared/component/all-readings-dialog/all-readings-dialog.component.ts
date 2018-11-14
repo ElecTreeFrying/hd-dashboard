@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators'
 
-import { FirestoreService } from '../../../core/service/firestore.service';
+import { DatabaseService } from '../../../core/service/database.service';
 
 @Component({
   selector: 'app-all-readings-dialog',
@@ -18,13 +18,19 @@ export class AllReadingsDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog,
-    private firestoreService: FirestoreService
+    private databaseService: DatabaseService
   ) { }
 
   ngOnInit() {
-    this.readings = this.firestoreService.getPatientReadings(this.data.patientNo);
+    this.readings = this.databaseService.getPatientReadings(this.data.patientNo);
 
     this.readings.subscribe(() => (this.isAdded = true));
+
+    this.readings.subscribe((response) => {
+
+      console.log(response);
+
+    });
   }
 
 

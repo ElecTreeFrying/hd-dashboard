@@ -127,8 +127,11 @@ export class FirestoreService {
             (data) => {
               fullname === value.payload.doc.data().fullname
                 ? data.docChanges().forEach((data) => {
-                  doc.push(data.doc.data());
-                }) : 0;
+                    const _data = data.doc.data();
+                    doc.filter((v) => {
+                      return v.fullname === _data.fullname
+                    }).length === 0 ? doc.push(_data) : 0;
+                  }) : 0;
             }
           )
         });
@@ -145,9 +148,12 @@ export class FirestoreService {
           value.payload.doc.ref.collection('patients').onSnapshot(
             (data) => {
               fullname === value.payload.doc.data().fullname
-              ? data.docChanges().forEach((data) => {
-                  doc.push(data.doc.data());
-                }) : 0;
+                ? data.docChanges().forEach((data) => {
+                    const _data = data.doc.data();
+                    doc.filter((v) => {
+                      return v.fullname === _data.fullname
+                    }).length === 0 ? doc.push(_data) : 0;
+                  }) : 0;
             }
           )
         });

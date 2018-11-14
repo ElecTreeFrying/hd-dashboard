@@ -19,7 +19,7 @@ export class ReadingsComponent implements OnInit {
   dialogRef_ST: MatDialogRef<SetTimeDialogComponent>;
   dialogRef_SR: MatDialogRef<AllReadingsDialogComponent>;
 
-  doctorPatients: Observable<any>
+  doctorPatients: Observable<any>;
   doctorDetails: any;
 
   isUndefined: boolean = true;
@@ -47,9 +47,9 @@ export class ReadingsComponent implements OnInit {
     });
   }
 
-  setTime(patient: any) {
-    this.dialogRef_ST = this.dialog.open(SetTimeDialogComponent, { data: { patient, doctor: this.doctorDetails}});
-  }
+  // setTime(patient: any) {
+  //   this.dialogRef_ST = this.dialog.open(SetTimeDialogComponent, { data: { patient, doctor: this.doctorDetails}});
+  // }
 
   addRemarks(patient: any) {
     this.dialogRef_AR = this.dialog.open(AddRemarksDialogComponent, { data: { patient, doctor: this.doctorDetails} });

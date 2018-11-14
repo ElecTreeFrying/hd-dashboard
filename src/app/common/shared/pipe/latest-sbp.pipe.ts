@@ -20,7 +20,7 @@ export class LatestSbpPipe implements PipeTransform {
     //     return readings.map((reading) => reading.sbpVal)[0];
     //   })
     // );
-    return this.firestoreService.getPatientReadings(value.patientNo).pipe(
+    return this.databaseService.getPatientReadings(value.patientNo).pipe(
       map((readings: any[]) => {
         return readings.map((reading) => reading.sbpVal)[0];
       })
