@@ -26,11 +26,6 @@ export class AllReadingsDialogComponent implements OnInit {
 
     this.readings.subscribe(() => (this.isAdded = true));
 
-    this.readings.subscribe((response) => {
-
-      console.log(response);
-
-    });
   }
 
 

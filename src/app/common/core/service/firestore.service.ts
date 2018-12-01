@@ -78,18 +78,6 @@ export class FirestoreService {
     return this.readCollection(this.userDoctors, isList);
   }
 
-  getPatientDetails_DOCTOR() {
-    return this.userPatients.snapshotChanges().pipe(
-      map((values) => {
-        return values.map((value) => {
-          const data = value.payload.doc.data();
-          const pushId = value.payload.doc.id;;
-          return { ...data, pushId };
-        });
-      })
-    );
-  }
-
   getOnlinePatient() {
     const patients = this.userPatients.valueChanges();
 
